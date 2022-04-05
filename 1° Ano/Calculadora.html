@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<title>Calculadora MUITO LEGAL E FUNCIONAL (sem nenhum bug cof cof)</title>
+<style>
+#inputDisplayResultado{
+    font-size: 24px;
+    width: 100%;
+    text-align: right;
+    border-color: rgba(0, 0, 0, 0.5);
+    color: rgb(0, 0, 0);
+}
+.areaCalculadora{
+    max-width: 800px;
+    margin: 0 auto;
+    display: block;
+}
+.row div{
+    padding: 1px;
+}
+.row div button{
+    width: 100%;
+    height: 60px;
+    border-radius: 0px;
+    border-color: rgba(0, 0, 0, 0.6);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+.row div button:hover{
+    background-color: black;
+    border-color: white;
+}
+body {
+    background-image: url(https://i.ytimg.com/vi/NXYE5H5jLUM/maxresdefault.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    min-height: 627px;
+}
+</style>
+</head>
+<body>
+    <div class="container areaCalculadora">
+        <div class="row">
+                <input id="inputDisplayResultado" type="text" value="" readonly />
+        </div>
+        
+        <div class="row justify-content-end">
+            <div class="col-3">
+                <button id="btnLimpar" type="button" class="btn btn-outline-warning" onclick="limparDados()">C</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <button id="btnValor7" type="button" class="btn btn-outline-primary" onclick="clicarNumero()">7</button>
+            </div>
+            <div class="col-3">
+                <button id="btnValor8" type="button" class="btn btn-outline-primary" onclick="clicarNumero()">8</button>
+            </div>
+            <div class="col-3">
+                <button id="btnValor9" type="button" class="btn btn-outline-primary" onclick="clicarNumero()">9</button>
+            </div>
+            <div class="col-3">
+                <button id="btnDividir" type="button" class="btn btn-outline-success" onclick="clicarOperador()">/</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <button id="btnValor4" type="button" class="btn btn-outline-primary" onclick="clicarNumero()">4</button>
+            </div>
+            <div class="col-3">
+                <button id="btnValor5" type="button" class="btn btn-outline-primary" onclick="clicarNumero()">5</button>
+            </div>
+            <div class="col-3">
+                <button id="btnValor6" type="button" class="btn btn-outline-primary" onclick="clicarNumero()">6</button>
+            </div>
+            <div class="col-3">
+                <button id="btnMultiplicar" type="button" class="btn btn-outline-success" onclick="clicarOperador()">*</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <button id="btnValor1" type="button" class="btn btn-outline-primary" onclick="clicarNumero()">1</button>
+            </div>
+            <div class="col-3">
+                <button id="btnValor2" type="button" class="btn btn-outline-primary" onclick="clicarNumero()">2</button>
+            </div>
+            <div class="col-3">
+                <button id="btnValor3" type="button" class="btn btn-outline-primary" onclick="clicarNumero()">3</button>
+            </div>
+            <div class="col-3">
+                <button id="btnSubtrair" type="button" class="btn btn-outline-success" onclick="clicarOperador()">-</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <button id="btnValor0" type="button" class="btn btn-outline-primary" onclick="clicarNumero()">0</button>
+            </div>
+            <div class="col-3">
+                <button id="btnPonto" type="button" class="btn btn-outline-success" onclick="clicarPonto()">.</button>
+            </div>
+            <div class="col-3">
+                <button id="btnResultado" type="button" class="btn btn-outline-success" onclick="clicarResultado()">=</button>
+            </div>
+            <div class="col-3">
+                <button id="btnSomar" type="button" class="btn btn-outline-success" onclick="clicarOperador()">+</button>
+            </div>
+        </div>
+    </div>
+<script>
+var inputResultado = document.getElementById("inputDisplayResultado");
+        
+var calculo = {
+    valorSalvo: null,
+    funcaoParaCalcular: null
+};
+
+function somarValores(valor1, valor2){
+    return valor1 + valor2;
+}
+function subtrairValores(valor1, valor2){
+    return valor1 - valor2;
+}
+function multiplicarValores(valor1, valor2){
+    return valor1 * valor2;
+}
+function dividirValores(valor1, valor2){
+    if(valor2 == 0){
+        return "Erro, divisão por zero!";
+    }else{
+        return valor1 / valor2;
+    }
+}
+function limparDados(){
+    inputResultado.value = "";
+    calculo.valorSalvo = null;
+    calculo.funcaoParaCalcular = null;
+}
+
+function clicarPonto(){
+    if(inputResultado.value === "" || isNaN(inputResultado.value)){
+        inputResultado.value = "0.";
+    }else if(!inputResultado.value.includes(".")){
+        inputResultado.value = inputResultado.value + ".";
+    }
+}
+
+function atribuirOperacao(operador){
+    if(operador == "+"){
+        calculo.funcaoParaCalcular = somarValores;
+    }else if(operador == "-"){
+        calculo.funcaoParaCalcular = subtrairValores;
+    }else if(operador == "*"){
+        calculo.funcaoParaCalcular = multiplicarValores;
+    }else{
+        calculo.funcaoParaCalcular = dividirValores;
+    }
+}
+function clicarOperador(){
+    if(!isNaN(inputResultado.value)){
+        if(calculo.valorSalvo == null){
+            calculo.valorSalvo = Number(inputResultado.value);
+        }else if(calculo.funcaoParaCalcular != null){
+            calculo.valorSalvo = calculo.funcaoParaCalcular(calculo.valorSalvo, Number(inputResultado.value));
+        }
+    }
+    let operador = event.target.textContent;
+    atribuirOperacao(operador);
+    inputResultado.value = operador;
+}
+function clicarNumero(){
+    if(isNaN(inputResultado.value)){
+        inputResultado.value = event.target.textContent;
+    }else{
+        if(inputResultado.value == 0){
+            inputResultado.value = event.target.textContent;
+        }else{
+            inputResultado.value += event.target.textContent;
+        }
+    }
+}
+function clicarResultado(){
+    if(!isNaN(inputResultado.value) && calculo.funcaoParaCalcular != null){
+        let resultado = calculo.funcaoParaCalcular(calculo.valorSalvo, Number(inputResultado.value));
+        inputResultado.value = resultado;
+        calculo.valorSalvo = resultado;
+        calculo.funcaoParaCalcular = null;
+    }
+}
+</script>
+</body>
+</html>

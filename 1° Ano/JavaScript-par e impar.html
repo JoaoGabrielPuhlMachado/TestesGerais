@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>AtividadePresencialDW</title>
+    <style>
+        body {
+            background-color: rgb(155, 155, 155);
+            font-family: Helvetica, sans-serif;
+}
+        h3 {
+            color: black;
+        }
+        p {
+            width: 2.1%;
+            text-align: center;
+        }
+</style>
+</head>
+<body>
+<h3>1°</h3>
+<script>
+    document.write('Olá Mundo')
+</script>
+<h3>2°</h3>
+<script>
+    var nome = prompt('Informe seu Nome')
+    alert('Bom dia '+nome+' tudo bem?');
+    document.write('Bom dia '+nome+' tudo bem?')
+</script>
+<h3>3°,4°,5°,6°</h3>
+<script>
+    var n1 = parseInt(prompt('Informe um número:'))
+    var n2 = parseInt(prompt('Informe outro número:'))
+    for(n=n1; n<=n2; n=n+1)
+    if (n%2==0){
+        document.write('<p style=background-color:#00F;color:#FFF; font-size:32px>'+n+'</p>')
+    }
+    else if(n%10==1){
+        document.write('<p style=background-color:#F00;color:#FFF; font-size:32px>'+n+'</p>')
+    }else if(n%10==3){
+        document.write('<p style=background-color:#0F0;color:#FFF; font-size:32px>'+n+'</p>')
+    }else if(n%10==5){
+        document.write('<p style=background-color:#000;color:#FFF; font-size:32px>'+n+'</p>')
+    }else if(n%10==7){
+        document.write('<p style=background-color:#FF0;color:#FFF; font-size:32px>'+n+'</p>')
+    }else if(n%10==9){
+        document.write('<p style=background-color:#F0F;color:#FFF; font-size:32px>'+n+'</p>')
+    }
+
+</script>
+
+</body>
+</html>

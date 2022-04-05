@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+
+
+
+</head>
+<body>
+
+<script>
+    var nome = prompt('Informe seu Nome')
+    var a = prompt('Informe seu Peso em Quilos :');
+    var b = prompt('Informe sua Altura em Metros: (ex: 1.70)');
+
+    var imc = a / (b * b)
+    if (imc < 14.5){
+    document.write(nome+" Seu IMC é: "+imc+"<br>Você está Desnutrido<br>Vá se Tratar Urgentemente");
+    }else{
+    if (imc > 14.5 && imc < 20){
+    document.write(nome+" Seu IMC é: "+imc+"<br>Você está Abaixo do Peso<br>Vá ao Nutricionista");
+    }else{
+    if (imc > 20 && imc < 24.9){
+    document.write(nome+" Seu IMC é: "+imc+"<br>Você está com Peso Normal");
+    }else{
+    if (imc > 25 && imc < 29.9){
+    document.write(nome+" Seu IMC é: "+imc+"<br>Você está com Sobrepeso<br>Vá ao Nutricionista");
+    }else{
+    if (imc > 30 && imc < 39.9){
+    document.write(nome+" Seu IMC é: "+imc+"<br>Você está Obeso<br>Vá ao Nutricionista");
+    }else{
+    if (imc > 40){
+    document.write(nome+" Seu IMC é: "+imc+"<br>Você está com Obesidade Mórbida<br>Vá se Tratar Urgentemente");
+    }
+    }               
+    }
+    }
+    }
+    }
+</script>
+
+</body>
+</html>
